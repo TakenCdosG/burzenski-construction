@@ -1,0 +1,34 @@
+#toolbar.overlay-displace-top
+{
+	display: none;
+
+}
+body
+{
+	padding-top: 0px; 
+}
+
+.views-row
+{
+	vertical-align: top;
+	padding: 5px;
+	margin: 5px;
+
+	border-color: #000000;
+	border-width: 1px;
+	border-style: solid;
+
+	width: 184px;
+float: left;
+min-height: 216px;
+}
+
+.view-content
+{width: 618px;
+	text-align: center;
+}
+
+.views-field-title
+{
+	margin-top: 5px;
+}

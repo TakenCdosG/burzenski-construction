@@ -1,0 +1,85 @@
+#slideshow {
+	position:relative;
+	z-index:100;
+}
+
+#slideshow .next,#slideshow .prev {
+	position:absolute;
+	top:145px;
+	left:-17px;
+	width:24px;
+	height:43px;
+	display:block;
+	z-index:50;
+}
+
+#slideshow .next {
+	left:676px;
+}
+
+#slideshow .slides_container {
+    width:640px;
+    height:270px;
+    overflow:hidden;
+}
+
+#slideshow .slides_container div.slide {
+	width:640px;
+    height:270px;
+    display:block;
+    overflow:hidden;
+}
+
+#slideshow .slides_container div.caption {
+	z-index:500;
+	position:absolute;
+	bottom:-35px;
+	left:0;
+	height:30px;
+	padding:5px 20px 0 20px;
+	background:#000;
+	background:rgba(255,255,255,.8);
+	width:640px;
+	font-size:1.3em;
+	line-height:1.33;
+	color:#524a3f;
+	text-shadow:none;
+	font:18px "Helvetica neue medium";
+}
+
+#slideshow .slides_container div.caption a {
+	color:#524a3f;
+}
+
+/* Restaurant week top slideshow */
+#top-slideshow {
+	position:relative;
+	z-index:100;
+}
+
+#top-slideshow .next,#top-slideshow .prev {
+	position:absolute;
+	top:106px;
+	left:-17px;
+	width:24px;
+	height:43px;
+	display:block;
+	z-index:50;
+}
+
+#top-slideshow .next {
+	left:973px;
+}
+
+#top-slideshow .slides_container {
+    width:972px;
+    height:277px;
+    overflow:hidden;
+}
+
+#top-slideshow .slides_container div.slide {
+	width:972px;
+    height:277px;
+    display:block;
+    overflow:hidden;
+}

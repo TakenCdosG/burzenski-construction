@@ -1,0 +1,10 @@
+name = Burzenski
+description = Module for Custom behavior for the Burzenski
+core = 7.x
+
+; Information added by drupal.org packaging script on 2011-05-24
+version = "7.x-1.2"
+core = "7.x"
+project = "variablecheck"
+datestamp = "1306219918"
+

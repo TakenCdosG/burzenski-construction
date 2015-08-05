@@ -1,0 +1,41 @@
+@font-face {
+	font-family: 'dinschriftregular';
+		src: url('../fonts/DIN/dinmitte.eot');
+		src: url('../fonts/DIN/dinmitte.eot?#iefix') format('embedded-opentype'),
+			url('../fonts/DIN/dinmitte.woff') format('woff'),
+			url('../fonts/DIN/dinmitte.ttf') format('truetype'),
+			url('../fonts/DIN/dinmitte.svg#dinschriftregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.internal_text{
+	color:#525353;
+	font-family:Arial;
+	font-size:14px;
+        line-height: 18px;
+}
+.smaller-text{
+	position:relative;
+	top:-3px;
+	font-family:Arial;
+	font-size:11px;
+	color:#525353;
+}
+.widget-1{
+	font-family:'dinschriftregular';
+	font-size:18px;
+	color:#f8f6f6;
+	line-height:24px;
+}
+.widget-2{
+	font-family:'dinschriftregular';
+	font-size:26px;
+	color:#f8f6f6;
+}
+.widget-3{
+	font-family:'dinschriftregular';
+	font-size:18px;
+	color:#C07807;
+	line-height:24px;
+}

@@ -1,0 +1,38 @@
+name = Burzenski
+description = This is the default theme used on the New Haven website
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = css/editor.css
+stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/slideshow.css
+stylesheets[all][] = css/desktop.css
+stylesheets[print][] = print.css
+stylesheets[all][] = css/jshowoff/jshowoff.css
+
+
+scripts[] = js/jquery-1.8.1.min.js
+scripts[] = js/jshowoff/jquery.jshowoff.js
+scripts[] = js/functions.js
+scripts[] = js/slides.min.jquery.js
+scripts[] = js/gcse.js
+scripts[] = js/jquery.cookie.js
+scripts[] = js/jquery.cycle.all.js
+
+
+regions[top_header] = Top Header
+regions[header] = Header
+regions[content] = content
+regions[sidebar_left] = Sidebar Left
+regions[sidebar_right] = Sidebar Right
+regions[sidebar_calendar] = Sidebar Calendar
+regions[footer] = Footer
+regions[second_menu] = Second Level Menu
+regions[menu_left_level] = Menu Left Level
+
+; Information added by drupal.org packaging script on 2012-08-01
+version = "7.18"
+project = "burzenski"
+datestamp = "1343839327"
+

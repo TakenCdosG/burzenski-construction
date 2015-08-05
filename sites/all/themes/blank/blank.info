@@ -1,0 +1,13 @@
+name = Blank
+description = This is the default theme used on the New Haven website
+package = Core
+version = VERSION
+core = 7.x
+
+
+stylesheets[all][] = css/styles.css
+
+regions[content] = content
+
+
+
