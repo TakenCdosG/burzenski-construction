@@ -136,13 +136,13 @@
                     <?php print render($page["sidebar_calendar"]); ?>
                 </div>
                 <div id="home-tabs-right">
-                    <div class="c_imgsecond">
+                    <!--<div class="c_imgsecond">
                         <div class="c2_imgsecond">
                             <div class="text_first">
-                                <?php print $global_node_config->field_home_quarter_content_quote['und'][0]['value']; ?>
+                                <?php /*print $global_node_config->field_home_quarter_content_quote['und'][0]['value']; */?>
                             </div> 
                         </div> 
-                    </div>
+                    </div>-->
                     <?php $type = "home_quarter_content"; ?>
                     <?php $nodes_home_quarter_content = node_load_multiple(array(), array('type' => $type, 'status' => 1)); ?>
                     <div id="slidingHomeQuarterContent">
@@ -174,8 +174,8 @@
                 <div class="c_imgfirst_medium" style="background-image:url(<?php print $fifth_image; ?>)">
                     <div class="text_first_medium" >
                         <?php print $nodos5->field_text_overlay['und'][0]['value']; ?>
-                    </div> 
-                </div> 
+                    </div>
+                </div>
                 <div id="img_print">
                     <img src="<?php print $base_path . $directory . "/img/img_4.fw.png" ?>">
                 </div>

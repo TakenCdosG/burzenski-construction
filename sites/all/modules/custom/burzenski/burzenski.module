@@ -184,7 +184,7 @@ function render_widgets($node){
     return $widgets;
 }
 
-function render_widgets_calendar($node){
+/*function render_widgets_calendar($node){
 
 $html ='
 <div>
@@ -199,7 +199,26 @@ $html ='
 $widgets["widget-".$node->nid]  = array('#markup' => $html );
 $rendered = true;
 return $widgets;
+}*/
+
+
+function render_widgets_calendar($node) {
+
+    $html = '
+<div>
+<div id="news_events">
+   <h1>Success Stories, Events & Blog</h1>
+  ' . views_embed_view("new_event_render", "blog") . views_embed_view("new_event_render", "news") . views_embed_view("new_event_render", "events") . views_embed_view("new_event_render", "text") . '
+</div>
+</div>
+';
+
+
+    $widgets["widget-" . $node->nid] = array('#markup' => $html);
+    $rendered = true;
+    return $widgets;
 }
+
 
 function get_format_date_calendar($field_date_event){
    

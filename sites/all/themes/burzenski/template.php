@@ -86,6 +86,7 @@ function burzenski_preprocess_page(&$vars){
   
 }
 
+
 function get_text_widget_rotate($nid){
 	$node_rotate=node_load($nid);
 	return $node_rotate->body['und'][0]['value'];

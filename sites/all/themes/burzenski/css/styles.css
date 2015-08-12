@@ -2200,12 +2200,13 @@ div.boxes-wrapper p.box-link a{
 
 .c2_imgfirst
 {
-    width: 260px;
-    height: 280px;
+    width: 620px;
+    height: 44px;
     background-image: url(../img/overlay_image.fw.png);
-    padding-top: 98px;
-    padding-left: 50px;
-    padding-right: 50px;
+    margin-top: 328px;
+    padding-left: 21px;
+    padding-right: 78px;
+    padding-top: 6px
 }
 
 .text_first
