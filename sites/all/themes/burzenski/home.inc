@@ -86,7 +86,7 @@
                     <?php $nodes_home_second_content = node_load_multiple(array(), array('type' => $type, 'status' => 1)); ?>
                     <div id="slidingHomeSecondContent">
                         <?php foreach ($nodes_home_second_content as $second_content): ?>
-                            <?php $image = $second_content->field_home_second_image; ?>
+                            <?php $image = $second_content->field_home_second_image['und']; ?>
                             <?php $video = $second_content->field_home_second_video; ?>
                             <?php if (!empty($image) || !empty($video)): ?> 
                                 <?php if (!empty($video)): ?>
