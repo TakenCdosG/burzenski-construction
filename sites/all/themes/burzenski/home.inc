@@ -99,15 +99,15 @@
                                         <!--<div class=''>
                                             <?php /*print theme_image_style(array('style_name' => 'small_image_home', 'path' => $image['und'][0]['uri'], 'alt' => $image['und'][0]['alt'], 'title' => $image['und'][0]['title'], 'height' => NULL, 'width' => NULL)); */?>
                                         </div>-->
-                                        <?php if (count($images) > 1): ?>
-                                            <?php foreach ($images as $key => $img): ?>
+                                        <?php if (count($image) > 1): ?>
+                                            <?php foreach ($image as $key => $img): ?>
                                                 <div>
                                                     <?php print theme_image_style(array('style_name' => 'small_image_home', 'path' => $img['uri'], 'alt' => $img['alt'], 'title' => $img['title'], 'height' => NULL, 'width' => NULL)); ?>
                                                 </div>
                                             <?php endforeach; ?>
                                         <?php else: ?>
                                             <div>
-                                                <?php print theme_image_style(array('style_name' => 'small_image_home', 'path' => $images[0]['uri'], 'alt' => $images[0]['alt'], 'title' => $images[0]['title'], 'height' => NULL, 'width' => NULL)); ?>
+                                                <?php print theme_image_style(array('style_name' => 'small_image_home', 'path' => $image[0]['uri'], 'alt' => $image[0]['alt'], 'title' => $image[0]['title'], 'height' => NULL, 'width' => NULL)); ?>
                                             </div>
                                         <?php endif; ?>
                                     <?php endif; ?> 
