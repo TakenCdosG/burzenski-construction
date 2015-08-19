@@ -65,4 +65,12 @@
 		<div id="map-google-map"></div>
 		<p id="get-direction"><a target="_blank" href="https://www.google.com/maps/dir//100+South+Shore+Drive+%23100,+East+Haven,+CT+06512,+EE.+UU./@41.2474209,-72.8776078,18z/data=!4m8!4m7!1m0!1m5!1m1!1s0x89e8781304e0e1a3:0x5f2be26bba367794!2m2!1d-72.8774327!2d41.2474598" >Get Directions</a></p>
 	</div>
+	<div style="width: 450px; float:left;" class="contact_side">
+            <?php print render($region['contact_side']); ?>
+            <?php
+            //$block = module_invoke('webform', 'block_view', 'client-block-650');
+            //print render($block['content']);
+            ?>        
+		</div>
+	</div>
 </div>	
