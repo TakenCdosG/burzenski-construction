@@ -1,206 +1,188 @@
 <?php
 
+function get_clear_link_social($link, $link_type) {
 
-function get_clear_link_social($link,$link_type){
+    $url_absolute = url($link, array('absolute' => false));
+    $pos3 = strpos($url_absolute, 'https://' . $link_type . '.com/');
+    $pos4 = strpos($url_absolute, 'http://' . $link_type . '.com/');
+    $pos5 = strpos($url_absolute, $link_type);
+    $pos6 = strpos($url_absolute, 'http');
 
-  $url_absolute =  url($link,array('absolute' => false));
- 
-  $pos3 = strpos($url_absolute, 'https://'.$link_type.'.com/');
-  $pos4 = strpos($url_absolute, 'http://'.$link_type.'.com/');
-  $pos5 = strpos($url_absolute, $link_type);
-  $pos6 = strpos($url_absolute, 'http');
+    if ($pos3 !== false || $pos4 !== false || $pos5 !== false) {
+        $url_cleared = $url_absolute;
+    } else {
+        $url_cleared = 'https://' . $link_type . '.com/' . $url_absolute;
+    }
 
-  if ($pos3 !== false || $pos4 !== false || $pos5 !== false ) {
-      $url_cleared = $url_absolute;
-  } else {
-     $url_cleared = 'https://'.$link_type.'.com/'.$url_absolute;
-  }
-  
-  if ($pos6 !== false){
-  
-  }else{
-  $url_cleared = "http://".$url_cleared;
-  }
-  
-  return $url_cleared;
+    if ($pos6 !== false) {
+        
+    } else {
+        $url_cleared = "http://" . $url_cleared;
+    }
+
+    return $url_cleared;
 }
 
 function burzenski_render_block($module, $delta) {
-  $block = module_invoke($module, 'block_view', $delta);
-  $block['module'] = $module;
-  $block['delta'] = $delta;
-  $vars = array('elements' => array('#block' => (object) $block, '#children' => render($block['content'])));
-  return theme('block', $vars);
+    $block = module_invoke($module, 'block_view', $delta);
+    $block['module'] = $module;
+    $block['delta'] = $delta;
+    $vars = array('elements' => array('#block' => (object) $block, '#children' => render($block['content'])));
+    return theme('block', $vars);
 }
 
-function get_3_level_tool_resources($breadcrumb){
-global $base_url;
-$menu = '';
-$breadcrumb_arr = explode("&gt;",$breadcrumb);
-$menutopmenu = menu_tree_page_data('menu-top-menu'); 
-
-$cont_2 = 0;
-$menu.= "<ul>";
-$visible=false;
-  foreach($menutopmenu as $key => $m) {
-
-		$linkPath = drupal_get_path_alias($m['link']['link_path']);
-  
-     if ($m['link']['in_active_trail'] && $menutopmenu[$key]['below']) {
-     if($m['link']['in_active_trail'] && is_array($m['below']) && count($m['below'])>0  && count($breadcrumb_arr)==2){
-       $menu.= "<li style='color:#0068ac;font-family:Georgia;font-weight:bold;font-size:15px;border-top: none;'><a href='/".$linkPath."'>".$m['link']['title']."</a></li>";
-       $weight ="font-weight:normal;";
-     }else{
-        $weight ="font-weight:bold;";
-     }
-     
-      foreach($m['below'] as $key_2 => $m_2) {
-
-			$linkPath2 = drupal_get_path_alias($m_2['link']['link_path']);
-			
-          if($cont_2==0){
-              $border = "border-top: none;";
-          }else{ $border ="";}
-          
-            if($m_2['link']['in_active_trail']==false){
-             $menu.= "<li style='color:#0068ac;font-family:Georgia;font-size:15px;font-weight:normal;".$border."'><a href='".url($m_2['link']['href'])."'>".$m_2['link']['title']."</a></li>";
-            }else{
-            $menu.= "<li style='color:#0068ac;font-family:Georgia;font-size:15px;font-weight:bold;".$border."'><a href='".url($m_2['link']['href'])."'>".$m_2['link']['title']."</a></li>";
-            }
-                
-         $cont_2 = $cont_2 + 1;
-      }
-    
-     }  
-  }
-  $menu.="</ul>"; 
-
-     return $menu;        
-}
-
-function get_3_level_menu($breadcrumb){
+function get_3_level_tool_resources($breadcrumb) {
     global $base_url;
- $menu = '';
- $breadcrumb_arr = explode("&gt;",$breadcrumb);
+    $menu = '';
+    $breadcrumb_arr = explode("&gt;", $breadcrumb);
+    $menutopmenu = menu_tree_page_data('menu-top-menu');
 
-$menuItems = menu_tree_page_data('main-menu'); 
-$menu.= "<ul>";
-$visible=false;
-  foreach($menuItems as $key => $m) {
+    $cont_2 = 0;
+    $menu.= "<ul>";
+    $visible = false;
+    foreach ($menutopmenu as $key => $m) {
 
-     if ($m['link']['in_active_trail'] && $menuItems[$key]['below']) {
-    $cont = 0;
-    foreach($menuItems[$key]['below'] as $key_2 => $m_2) {
-        if($m_2['link']['in_active_trail'] && is_array($m_2['below']) && count($m_2['below'])>0){
-           if(count($breadcrumb_arr)==3){
-				
-				$linkPath1 = drupal_get_path_alias($m_2['link']['link_path']);
-			  
-            $menu.= "<li style='color:#0068ac;font-family:Georgia;font-weight:bold;font-size:15px;border-top: none;'><a href='".$base_url."/".$linkPath1."'>".$m_2['link']['title']."</a></li>";
+        $linkPath = drupal_get_path_alias($m['link']['link_path']);
+
+        if ($m['link']['in_active_trail'] && $menutopmenu[$key]['below']) {
+            if ($m['link']['in_active_trail'] && is_array($m['below']) && count($m['below']) > 0 && count($breadcrumb_arr) == 2) {
+                $menu.= "<li style='color:#0068ac;font-family:Georgia;font-weight:bold;font-size:15px;border-top: none;'><a href='/" . $linkPath . "'>" . $m['link']['title'] . "</a></li>";
+                $weight = "font-weight:normal;";
+            } else {
+                $weight = "font-weight:bold;";
             }
-           foreach($m_2['below'] as $key_3 => $m_3) {
-                 if($cont==0 && count($breadcrumb_arr)!=3){
-              $border = "border-top: none;";
-             }else $border ="";
-             
-				 $linkPath2 = drupal_get_path_alias($m_2['below'][$key_3]['link']['link_path']);
-				 
-             if($m_3['link']['in_active_trail']==false){
-                $menu.= "<li style='".$border."'><a href='".$base_url."/".$linkPath2."'>".$m_2['below'][$key_3]['link']['title']."</a></li>";
-              $visible = true;
-             }else{
-               $menu.= "<li style='color:#0068ac;font-family:Georgia;font-weight:bold;font-size:15px;".$border."'><a href='".$base_url."/".$linkPath2."'>".$m_2['below'][$key_3]['link']['title']."</a></li>";
-             }
-             $cont = $cont + 1;
-           } 
+
+            foreach ($m['below'] as $key_2 => $m_2) {
+
+                $linkPath2 = drupal_get_path_alias($m_2['link']['link_path']);
+
+                if ($cont_2 == 0) {
+                    $border = "border-top: none;";
+                } else {
+                    $border = "";
+                }
+
+                if ($m_2['link']['in_active_trail'] == false) {
+                    $menu.= "<li style='color:#0068ac;font-family:Georgia;font-size:15px;font-weight:normal;" . $border . "'><a href='" . url($m_2['link']['href']) . "'>" . $m_2['link']['title'] . "</a></li>";
+                } else {
+                    $menu.= "<li style='color:#0068ac;font-family:Georgia;font-size:15px;font-weight:bold;" . $border . "'><a href='" . url($m_2['link']['href']) . "'>" . $m_2['link']['title'] . "</a></li>";
+                }
+
+                $cont_2 = $cont_2 + 1;
+            }
         }
     }
-     }  
-  }
-  $menu.="</ul>"; 
-  if(!$visible){
-   $menu = "";
-  }
-  
-     return $menu;        
-} 
+    $menu.="</ul>";
+
+    return $menu;
+}
+
+function get_3_level_menu($breadcrumb) {
+    global $base_url;
+    $menu = '';
+    $breadcrumb_arr = explode("&gt;", $breadcrumb);
+
+    $menuItems = menu_tree_page_data('main-menu');
+    $menu.= "<ul>";
+    $visible = false;
+    foreach ($menuItems as $key => $m) {
+
+        if ($m['link']['in_active_trail'] && $menuItems[$key]['below']) {
+            $cont = 0;
+            foreach ($menuItems[$key]['below'] as $key_2 => $m_2) {
+                if ($m_2['link']['in_active_trail'] && is_array($m_2['below']) && count($m_2['below']) > 0) {
+                    if (count($breadcrumb_arr) == 3) {
+
+                        $linkPath1 = drupal_get_path_alias($m_2['link']['link_path']);
+
+                        $menu.= "<li style='color:#0068ac;font-family:Georgia;font-weight:bold;font-size:15px;border-top: none;'><a href='" . $base_url . "/" . $linkPath1 . "'>" . $m_2['link']['title'] . "</a></li>";
+                    }
+                    foreach ($m_2['below'] as $key_3 => $m_3) {
+                        if ($cont == 0 && count($breadcrumb_arr) != 3) {
+                            $border = "border-top: none;";
+                        }else
+                            $border = "";
+
+                        $linkPath2 = drupal_get_path_alias($m_2['below'][$key_3]['link']['link_path']);
+
+                        if ($m_3['link']['in_active_trail'] == false) {
+                            $menu.= "<li style='" . $border . "'><a href='" . $base_url . "/" . $linkPath2 . "'>" . $m_2['below'][$key_3]['link']['title'] . "</a></li>";
+                            $visible = true;
+                        } else {
+                            $menu.= "<li style='color:#0068ac;font-family:Georgia;font-weight:bold;font-size:15px;" . $border . "'><a href='" . $base_url . "/" . $linkPath2 . "'>" . $m_2['below'][$key_3]['link']['title'] . "</a></li>";
+                        }
+                        $cont = $cont + 1;
+                    }
+                }
+            }
+        }
+    }
+    $menu.="</ul>";
+    if (!$visible) {
+        $menu = "";
+    }
+
+    return $menu;
+}
 
 function burzenski_ctools_plugin_api($module = '', $api = '') {
-  if ($module == "feeds" && $api == "feeds_importer_default") {
-    // The current API version is 1.
-    return array("version" => 1);
-  }
-} 
+    if ($module == "feeds" && $api == "feeds_importer_default") {
+        // The current API version is 1.
+        return array("version" => 1);
+    }
+}
 
 define("_GLOBAL_CONFIGURATIONS_NODE", 286);
 
-/** Load the current node **/
-function current_node(){
-    if(arg(0)=='node'&&is_numeric(arg(1))){
-        return node_load(arg(1));       
+/** Load the current node * */
+function current_node() {
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+        return node_load(arg(1));
     }
 }
 
-function node_tasks($nid){
-    
-  if(user_is_logged_in()){ 
-    return    "<div class='node-tasks'>[".
-            "<a href='/node/$nid/edit?destination=".$_GET['q']."'>Edit</a>]</div>";
-  }
-  return "";
+function node_tasks($nid) {
+
+    if (user_is_logged_in()) {
+        return "<div class='node-tasks'>[" .
+                "<a href='/node/$nid/edit?destination=" . $_GET['q'] . "'>Edit</a>]</div>";
+    }
+    return "";
 }
 
-function burzenski_page_alter(&$page){
-  $node = current_node();
-  if(!drupal_is_front_page() && $node && property_exists($node, "field_widget_right")){
-    if(!array_key_exists("sidebar_right", $page)) {
-      $page["sidebar_right"] = array();
+function burzenski_page_alter(&$page) {
+    $node = current_node();
+    if (!drupal_is_front_page() && $node && property_exists($node, "field_widget_right")) {
+        if (!array_key_exists("sidebar_right", $page)) {
+            $page["sidebar_right"] = array();
+        }
+        $page["sidebar_right"] += render_widgets($node);
     }
-    $page["sidebar_right"] += render_widgets($node);
-  }
-  
-   if( $node && property_exists($node, "field_show_widget_news_events_") &&  $node->field_show_widget_news_events_['und'][0]['value']=='1'){
-    if(!array_key_exists("sidebar_calendar", $page)) {
-      $page["sidebar_calendar"] = array();
+
+    if ($node && property_exists($node, "field_show_widget_news_events_") && $node->field_show_widget_news_events_['und'][0]['value'] == '1') {
+        if (!array_key_exists("sidebar_calendar", $page)) {
+            $page["sidebar_calendar"] = array();
+        }
+        $page["sidebar_calendar"] += render_widgets_calendar($node);
     }
-    $page["sidebar_calendar"] += render_widgets_calendar($node);
-  }
 }
 
-function render_widgets($node){ 
+function render_widgets($node) {
     static $rendered = false;
     $widgets = array();
-    if($rendered){
+    if ($rendered) {
         return array();
     }
-    
-    if(array_key_exists("und", $node->field_widget_right)) 
-    foreach($node->field_widget_right["und"] as $widget){
-      $node = node_load($widget["nid"]);
-      
-      $widgets["widget-".$node->nid]  = array('#markup' => render(node_view($node)) );
-    }
+
+    if (array_key_exists("und", $node->field_widget_right))
+        foreach ($node->field_widget_right["und"] as $widget) {
+            $node = node_load($widget["nid"]);
+
+            $widgets["widget-" . $node->nid] = array('#markup' => render(node_view($node)));
+        }
     $rendered = true;
     return $widgets;
 }
-
-/*function render_widgets_calendar($node){
-
-$html ='
-<div>
-<div id="news_events">
-   <h1>News, Events & Blog</h1>
-  '.views_embed_view("new_event_render","blog").views_embed_view("new_event_render","news").views_embed_view("new_event_render","events").'
-</div>
-</div>
-';
-
- 
-$widgets["widget-".$node->nid]  = array('#markup' => $html );
-$rendered = true;
-return $widgets;
-}*/
-
 
 function render_widgets_calendar($node) {
 
@@ -219,379 +201,373 @@ function render_widgets_calendar($node) {
     return $widgets;
 }
 
+function get_format_date_calendar($field_date_event) {
 
-function get_format_date_calendar($field_date_event){
-   
-   $array_field_date_event=explode("*",$field_date_event);
-   
-    $initial_date=$array_field_date_event[0];
-  $final_date=$array_field_date_event[1];
-  
-  $initial_date = substr( $initial_date, 0, 10 ); 
-  $final_date = substr( $final_date, 0, 10 ); 
-  
-  if($initial_date==$final_date ){ 
-     $array_initial_date=explode("-",$initial_date);
-     $years=$array_initial_date[0];
-     $month=$array_initial_date[1];
-     $day=$array_initial_date[2];
-     $format= date("F",mktime(0,0,0,$month,$d,$years))." ".(string)(int)$day; 
-  
-  }else{
-       $array_initial_date=explode("-",$initial_date);
-       $array_final_date=explode("-",$final_date);
-       $years=$array_initial_date[0];
-       $month=$array_initial_date[1];
-       $day=$array_initial_date[2];
-        
-       if($month==$array_final_date[1]){
-          $format= date("F",mktime(0,0,0,$month,$d,$years))." ".(string)(int)$day."-".(string)(int)$array_final_date[2]; 
-       }else{
-          $format= date("F",mktime(0,0,0,$month,$day,$years))." ".(string)(int)$day." - ".date("F",mktime(0,0,0,$array_final_date[1],$array_final_date[2],$array_final_date[0]))." ".(string)(int)$array_final_date[2]; 
-       }
-  }
-  
-  return $format;
+    $array_field_date_event = explode("*", $field_date_event);
 
+    $initial_date = $array_field_date_event[0];
+    $final_date = $array_field_date_event[1];
+
+    $initial_date = substr($initial_date, 0, 10);
+    $final_date = substr($final_date, 0, 10);
+
+    if ($initial_date == $final_date) {
+        $array_initial_date = explode("-", $initial_date);
+        $years = $array_initial_date[0];
+        $month = $array_initial_date[1];
+        $day = $array_initial_date[2];
+        $format = date("F", mktime(0, 0, 0, $month, $d, $years)) . " " . (string) (int) $day;
+    } else {
+        $array_initial_date = explode("-", $initial_date);
+        $array_final_date = explode("-", $final_date);
+        $years = $array_initial_date[0];
+        $month = $array_initial_date[1];
+        $day = $array_initial_date[2];
+
+        if ($month == $array_final_date[1]) {
+            $format = date("F", mktime(0, 0, 0, $month, $d, $years)) . " " . (string) (int) $day . "-" . (string) (int) $array_final_date[2];
+        } else {
+            $format = date("F", mktime(0, 0, 0, $month, $day, $years)) . " " . (string) (int) $day . " - " . date("F", mktime(0, 0, 0, $array_final_date[1], $array_final_date[2], $array_final_date[0])) . " " . (string) (int) $array_final_date[2];
+        }
+    }
+
+    return $format;
 }
 
-function loadObjectList( $result ){   
-  $array = array();   
-  while ( $row = @mysql_fetch_object($result) ){   
-    $array[] = $row;   
-  }   
-  return $array;   
+function loadObjectList($result) {
+    $array = array();
+    while ($row = @mysql_fetch_object($result)) {
+        $array[] = $row;
+    }
+    return $array;
 }
 
 function readcontent($link) {
-  
-  # collect the content
-  $file = file_get_contents($link);
-  
-  # mark head, bullets, & paragraphs
-  $file = str_replace('<font face="Verdana, Arial, Helvetica, sans-serif" size="4"><b>','<h2>',$file);
-  $file = str_replace("\r\n",' ',$file);
-  $file = str_replace("\r",' ',$file);
-  $file = str_replace("\n",' ',$file);
-  $file = str_replace(' target="_blank"','',$file);
-  $file = str_replace('<p>&nbsp; </p>','',$file);
-  $file = str_replace('<img src="blkball.gif" width="6" height="6">','* ',$file);
-  $file = str_replace("onClick='parent.self.close();'",' ',$file);
-  # take care of those extra spaces
-  $spaces = '                                                                 ';
-  while (strlen($spaces) > 0) {
-    $file = str_replace($spaces,' ',$file);
-    $spaces = substr($spaces,0,strlen($spaces)-1);
-  }
-  
-  # strip the tags
-  $file = strip_tags($file, '<p><h2><a>');
-  
-  # remove excess from start
-  $file = substr($file,strpos($file,'<h2>'));
-  #remove excess from end
-  $file = strpos($file,'priortips.asp') ?
-          substr($file,0,strpos($file,'priortips.asp')-9) : $file;
-  
-  # close empty tags
-  $file = str_replace('<p>',"</h2>\r\n<p>",$file);
-  $file = str_replace("</p> </h2>\r\n<p>","</p>\r\n<p>",$file);
-  $file = str_replace("</h2></p>\r\n<p>","</p>\r\n<p>",$file);
-  $file = (strpos($file,'</p>') < strpos($file,'<p>')) ? 
-          preg_replace('/\<\/p\>/','</h2><p>',$file,1) : $file;
-  $file = str_replace("</h2>\r\n</p>",'',$file);
-  $file = str_replace("\r\n<p>","</p>\r\n<p>",$file);
-  $file = str_replace("</p></p>","</p>",$file);
-  $file = (substr($file,strlen($file)-4,4)=='</p>') ? $file : $file.'</p>';
-  $file = str_replace('</p> </p>','</p>',$file); # make sure we don't have 2 closing <p>s
-  
-  # replace special characters
- /* $file = str_replace('&nbsp;',' ',$file);           # space
-  $file = str_replace('&','&#38;',$file);            # &
-  $file = str_replace('’','&#8217;',$file);          # ’
-  $file = str_replace('“','&#8220;',$file);          # “
-  $file = str_replace('”','&#8221;',$file);          # ”
-  $file = str_replace(' - ',' &#8211; ',$file);      # en dash
-  $file = str_replace(' -- ','&#8212;',$file);       # em dash
-  $file = str_replace('* ','<br />&#8226; ',$file);  # bullet
-*/
-  $file = str_replace('©',"&copy;",$file);          # “
-  
-  # see what it looks like
-  
-  return $file;
+
+    # collect the content
+    $file = file_get_contents($link);
+
+    # mark head, bullets, & paragraphs
+    $file = str_replace('<font face="Verdana, Arial, Helvetica, sans-serif" size="4"><b>', '<h2>', $file);
+    $file = str_replace("\r\n", ' ', $file);
+    $file = str_replace("\r", ' ', $file);
+    $file = str_replace("\n", ' ', $file);
+    $file = str_replace(' target="_blank"', '', $file);
+    $file = str_replace('<p>&nbsp; </p>', '', $file);
+    $file = str_replace('<img src="blkball.gif" width="6" height="6">', '* ', $file);
+    $file = str_replace("onClick='parent.self.close();'", ' ', $file);
+    # take care of those extra spaces
+    $spaces = '                                                                 ';
+    while (strlen($spaces) > 0) {
+        $file = str_replace($spaces, ' ', $file);
+        $spaces = substr($spaces, 0, strlen($spaces) - 1);
+    }
+
+    # strip the tags
+    $file = strip_tags($file, '<p><h2><a>');
+
+    # remove excess from start
+    $file = substr($file, strpos($file, '<h2>'));
+    #remove excess from end
+    $file = strpos($file, 'priortips.asp') ?
+            substr($file, 0, strpos($file, 'priortips.asp') - 9) : $file;
+
+    # close empty tags
+    $file = str_replace('<p>', "</h2>\r\n<p>", $file);
+    $file = str_replace("</p> </h2>\r\n<p>", "</p>\r\n<p>", $file);
+    $file = str_replace("</h2></p>\r\n<p>", "</p>\r\n<p>", $file);
+    $file = (strpos($file, '</p>') < strpos($file, '<p>')) ?
+            preg_replace('/\<\/p\>/', '</h2><p>', $file, 1) : $file;
+    $file = str_replace("</h2>\r\n</p>", '', $file);
+    $file = str_replace("\r\n<p>", "</p>\r\n<p>", $file);
+    $file = str_replace("</p></p>", "</p>", $file);
+    $file = (substr($file, strlen($file) - 4, 4) == '</p>') ? $file : $file . '</p>';
+    $file = str_replace('</p> </p>', '</p>', $file); # make sure we don't have 2 closing <p>s
+    # replace special characters
+    /* $file = str_replace('&nbsp;',' ',$file);           # space
+      $file = str_replace('&','&#38;',$file);            # &
+      $file = str_replace('’','&#8217;',$file);          # ’
+      $file = str_replace('“','&#8220;',$file);          # “
+      $file = str_replace('”','&#8221;',$file);          # ”
+      $file = str_replace(' - ',' &#8211; ',$file);      # en dash
+      $file = str_replace(' -- ','&#8212;',$file);       # em dash
+      $file = str_replace('* ','<br />&#8226; ',$file);  # bullet
+     */
+    $file = str_replace('©', "&copy;", $file);          # “
+    # see what it looks like
+
+    return $file;
 }
 
+/* * *********************  creamos los callback para cargar la informacion dee las secciones Online Advisor y Tax Tips For The Week ***************** */
 
-/***********************  creamos los callback para cargar la informacion dee las secciones Online Advisor y Tax Tips For The Week ******************/
+function burzenski_menu() {
+    $items['admin/bg-home'] = array(
+        'title' => t('Set home background image AJAX'),
+        'type' => MENU_CALLBACK,
+        'page callback' => 'burzenski_home_bg',
+        'access arguments' => array('access content'),
+    );
 
+    $items['load_online_advisor'] = array(
+        'title' => 'Load Online Advisor',
+        'page callback' => 'load_online_advisor',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
-function burzenski_menu(){
-	$items['admin/bg-home'] = array(
-		'title' => t('Set home background image AJAX'),
-		'type' => MENU_CALLBACK,
-		'page callback' => 'burzenski_home_bg',
-		'access arguments' => array('access content'),
-	);
+    $items['load_tax_tips_for_the_week'] = array(
+        'title' => 'Load Tax Tips for the Week',
+        'page callback' => 'load_tax_tips_for_the_week',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
-$items['load_online_advisor'] = array(
-'title' => 'Load Online Advisor',
-'page callback' => 'load_online_advisor',
-'access callback' => TRUE,
-'type' => MENU_CALLBACK,
-);
+    $items['save_tax_tips'] = array(
+        'title' => 'Save Tax Tips for the Week',
+        'page callback' => 'save_tax_tips',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
-$items['load_tax_tips_for_the_week'] = array(
-'title' => 'Load Tax Tips for the Week',
-'page callback' => 'load_tax_tips_for_the_week',
-'access callback' => TRUE,
-'type' => MENU_CALLBACK,
-);
-
-$items['save_tax_tips'] = array(
-'title' => 'Save Tax Tips for the Week',
-'page callback' => 'save_tax_tips',
-'access callback' => TRUE,
-'type' => MENU_CALLBACK,
-);
-
-return $items;
+    return $items;
 }
 
 // This function get the home background image
-function burzenski_home_bg(){
-	$num = $_POST['num'];
-	
-	$homeNode = node_load(4);
-	
-	print file_create_url($homeNode->field_background_image['und'][$num]['uri']);
+function burzenski_home_bg() {
+    $num = $_POST['num'];
+
+    $homeNode = node_load(4);
+
+    print file_create_url($homeNode->field_background_image['und'][$num]['uri']);
 }
 
-/*********************** creamos la funcion que carga los Online Advisor******************/
+/* * ********************* creamos la funcion que carga los Online Advisor***************** */
 
 include 'simple_html_dom.php';
 
-function load_online_advisor(){
+function load_online_advisor() {
 
-	$feeder = 'http://www.planningtips.com/Planning_Tips.asp?Co_ID=16403&Tip_ID=6850';
+    $feeder = 'http://www.planningtips.com/Planning_Tips.asp?Co_ID=16403&Tip_ID=6850';
 
-	$html = file_get_html($feeder);
-	$links = $html->find('table a');
+    $html = file_get_html($feeder);
+    $links = $html->find('table a');
 
-	$date =$html->find('div.date',0)->plaintext;
+    $date = $html->find('div.date', 0)->plaintext;
 
-	if(!empty($date)){
-		$date = str_replace('For',' ',$date);
-		$date = explode(' ',$date);
-		$month = date('m',strtotime($date[0]));
-		$date = $date[1]."-".$month."-01 00:00:00";
-	}
+    if (!empty($date)) {
+        $date = str_replace('For', ' ', $date);
+        $date = explode(' ', $date);
+        $month = date('m', strtotime($date[0]));
+        $date = $date[1] . "-" . $month . "-01 00:00:00";
+    }
 
-	foreach ($links as $key => $value){
+    foreach ($links as $key => $value) {
 
-		$link =  "http://www.planningtips.com/".$links[$key]->href."?co_id=16403&tip_id=6850";  
+        $link = "http://www.planningtips.com/" . $links[$key]->href . "?co_id=16403&tip_id=6850";
 
-		$content = file_get_html($link);
+        $content = file_get_html($link);
 
-		$imgs =$content->find('img');
-		
-		if (!empty($imgs)){
-			foreach ($imgs as $key => $value){
-				$content->find('img',$key)->outertext='';
-			}
-		}
-		
-		$content->find('table',0)->outertext='';
-		$divpa = $content->find('div[align=center] p a');
+        $imgs = $content->find('img');
 
-		foreach ($divpa as $key => $value) {
-			$content->find('div[align=center] p a',$key)->outertext='';
-		} 
-
-		$content->save();
-
-                
-		$content_title = $content->find('title',0);
-                $content_title = $content_title->innertext;
-                $newNodeTitle = str_replace('"', '', $content_title);
-
-                $result = db_query("SELECT n.title, f.field_date_news_value FROM {node} n,{field_data_field_date_news} f WHERE f.entity_id = n.nid AND n.type = :onad AND n.title = :ntitle AND f.field_date_news_value = :fdate",array(':onad'=>'online_advisor',':ntitle'=>$newNodeTitle,':fdate'=>$date));
-                
-               
-                 $rowLenght = $result->rowCount();
-                
-
-               if(!$rowLenght){    
-
-		// Create a node object, and add node properties.
-		$newNode = (object) NULL;
-		$newNode->type = 'online_advisor';
-		$newNode->uid = 1;
-		$newNode->created = strtotime("now");
-		$newNode->changed = strtotime("now");
-		$newNode->status = 1;
-		$newNode->comment = 0;
-		$newNode->promote = 0;
-		$newNode->moderate = 0;
-		$newNode->sticky = 0;
-		$newNode->language = 'und';
-
-		$newNode->title = str_replace('"', '', $content_title);
-		$contenedor = $content->outertext; 
-
-		$contenedor = str_replace('|',' ', $contenedor);
-		$contenedor = str_replace('width="600"','width="100%"', $contenedor);
-		$contenedor = str_replace('width="600px"','width="100%"', $contenedor);
-		$newNode->field_url['und'][0]['value'] = $link;
-		$newNode->field_date_news['und'][0]['value'] = $date;
-
-		$newNode->body['und'][0]['value'] = $contenedor;
-		$newNode->body['und'][0]['format'] = 'full_html'; 
-
-		/* add the menu item for the node */ 
-		/*$newNode->menu = array(
-			'enabled' => 1,
-			'mlid' => 0,
-			'module' => 'menu',
-			'hidden' => 0,
-			'has_children' => 0,
-			'customized' => 0,
-			'options' => array(),
-			'expanded' => 0,
-			'parent_depth_limit' => 8,
-			'link_title' => $content_title,
-			'description' => '',
-			'weight' => 0,
-			'plid' => 841,
-			'menu_name' => 'menu-top-menu');
-*/
-		node_save($newNode);
-		
-		//Create a path alias for the node.
-		$path['alias'] = str_replace(' ', '-', $content_title);
-		$path['source'] = 'node/'.$newNode->nid;
-		$path['language'] = LANGUAGE_NONE;
-		path_save($path);
-	}
+        if (!empty($imgs)) {
+            foreach ($imgs as $key => $value) {
+                $content->find('img', $key)->outertext = '';
+            }
         }
+
+        $content->find('table', 0)->outertext = '';
+        $divpa = $content->find('div[align=center] p a');
+
+        foreach ($divpa as $key => $value) {
+            $content->find('div[align=center] p a', $key)->outertext = '';
+        }
+
+        $content->save();
+
+
+        $content_title = $content->find('title', 0);
+        $content_title = $content_title->innertext;
+        $newNodeTitle = str_replace('"', '', $content_title);
+
+        $result = db_query("SELECT n.title, f.field_date_news_value FROM {node} n,{field_data_field_date_news} f WHERE f.entity_id = n.nid AND n.type = :onad AND n.title = :ntitle AND f.field_date_news_value = :fdate", array(':onad' => 'online_advisor', ':ntitle' => $newNodeTitle, ':fdate' => $date));
+
+
+        $rowLenght = $result->rowCount();
+
+
+        if (!$rowLenght) {
+
+            // Create a node object, and add node properties.
+            $newNode = (object) NULL;
+            $newNode->type = 'online_advisor';
+            $newNode->uid = 1;
+            $newNode->created = strtotime("now");
+            $newNode->changed = strtotime("now");
+            $newNode->status = 1;
+            $newNode->comment = 0;
+            $newNode->promote = 0;
+            $newNode->moderate = 0;
+            $newNode->sticky = 0;
+            $newNode->language = 'und';
+
+            $newNode->title = htmlspecialchars_decode(str_replace('"', '', $content_title));
+            $contenedor = $content->outertext;
+
+            $contenedor = str_replace('|', ' ', $contenedor);
+            $contenedor = str_replace('width="600"', 'width="100%"', $contenedor);
+            $contenedor = str_replace('width="600px"', 'width="100%"', $contenedor);
+            $newNode->field_url['und'][0]['value'] = $link;
+            $newNode->field_date_news['und'][0]['value'] = $date;
+
+            $newNode->body['und'][0]['value'] = $contenedor;
+            $newNode->body['und'][0]['format'] = 'full_html';
+
+            /* add the menu item for the node */
+            /* $newNode->menu = array(
+              'enabled' => 1,
+              'mlid' => 0,
+              'module' => 'menu',
+              'hidden' => 0,
+              'has_children' => 0,
+              'customized' => 0,
+              'options' => array(),
+              'expanded' => 0,
+              'parent_depth_limit' => 8,
+              'link_title' => $content_title,
+              'description' => '',
+              'weight' => 0,
+              'plid' => 841,
+              'menu_name' => 'menu-top-menu');
+             */
+            node_save($newNode);
+
+            //Create a path alias for the node.
+            $path['alias'] = str_replace(' ', '-', $content_title);
+            $path['source'] = 'node/' . $newNode->nid;
+            $path['language'] = LANGUAGE_NONE;
+            path_save($path);
+        }
+    }
 }
-/*********************** we create the function to load Tax tip of the week******************/
 
-function load_tax_tips_for_the_week(){
+/* * ********************* we create the function to load Tax tip of the week***************** */
 
-$newNode = node_load(140);
-$link = 'http://www.planningtips.com/Planning_Tips.asp?Co_ID=16403&Tip_ID=6801';
+function load_tax_tips_for_the_week() {
 
-$content = file_get_html($link);
+    $newNode = node_load(140);
+    $link = 'http://www.planningtips.com/Planning_Tips.asp?Co_ID=16403&Tip_ID=6801';
 
-$imgs =$content->find('img');
-foreach ($imgs as $key => $value) {
-$content->find('img',$key)->outertext='';
+    $content = file_get_html($link);
+
+    $imgs = $content->find('img');
+    foreach ($imgs as $key => $value) {
+        $content->find('img', $key)->outertext = '';
+    }
+
+    $content->find('div.nav-wrap', 0)->outertext = '';
+    $content->find('<p></p>', 0)->outertext = '';
+    $content->find('span.top-firm-name', 0)->outertext = '';
+    $content->find('div#printerFriendly', 0)->outertext = '';
+    $content->find('br[class=clear]', 0)->outertext = '';
+    $content->find('div#footer', 0)->id = NULL;
+
+    $br_br = $content->find('br');
+    foreach ($br_br as $key => $value) {
+        $content->find('br', $key)->outertext = '';
+    }
+
+    $date = $content->find('h2', 0)->innertext;
+    $date = explode(' ', $date);
+    $month = date('m', strtotime($date[0]));
+
+    $date = $date[2] . '-' . $month . '-' . $date[1] . ' 00:00:00';
+
+    $content->save();
+
+    $newNode->body['und'][0]['value'] = $content;
+    $newNode->field_date_news['und'][0]['value'] = $date;
+
+    node_save($newNode);
 }
 
-$content->find('div.nav-wrap',0)->outertext = '';
-$content->find('<p></p>',0)->outertext = '';
-$content->find('span.top-firm-name',0)->outertext = '';
-$content->find('div#printerFriendly',0)->outertext = '';
-$content->find('br[class=clear]',0)->outertext = '';
-$content->find('div#footer',0)->id=NULL;
+function save_tax_tips() {
 
-$br_br = $content->find('br');
-foreach ($br_br as $key => $value) {
-  $content->find('br',$key)->outertext = '';
-}
+    $link = 'http://www.planningtips.com/Planning_Tips.asp?Co_ID=16403&Tip_ID=6801';
+    $content = file_get_html($link);
 
-$date = $content->find('h2',0)->innertext;
-$date = explode(' ', $date);
-$month = date('m',strtotime($date[0]));
+    $imgs = $content->find('img');
 
-$date = $date[2].'-'.$month.'-'.$date[1].' 00:00:00';
+    foreach ($imgs as $key => $value) {
+        $content->find('img', $key)->outertext = '';
+    }
 
-$content->save();
+    $content->find('div.nav-wrap', 0)->outertext = '';
+    $content->find('span.top-firm-name', 0)->outertext = '';
+    $content->find('div#printerFriendly', 0)->outertext = '';
+    $content->find('br[class=clear]', 0)->outertext = '';
+    $content->find('div#footer', 0)->id = NULL;
 
-$newNode->body['und'][0]['value'] = $content;
-$newNode->field_date_news['und'][0]['value'] = $date;
+    $br_br = $content->find('br');
 
-node_save($newNode);
-}
+    foreach ($br_br as $key => $value) {
+        $content->find('br', $key)->outertext = '';
+    }
 
-function save_tax_tips(){
+    $date = $content->find('h2', 0)->innertext;
 
-	$link = 'http://www.planningtips.com/Planning_Tips.asp?Co_ID=16403&Tip_ID=6801';
-	$content = file_get_html($link);
+    $date = explode(' ', $date);
+    $month = date('m', strtotime($date[0]));
+    $day = str_replace(',', '', $date[1]);
 
-	$imgs =$content->find('img');
+    $date = $date[2] . '-' . $month . '-' . $day . ' 00:00:00';
 
-	foreach ($imgs as $key => $value){
-		$content->find('img',$key)->outertext='';
-	}
+    $title = $content->find('h1', 0)->innertext;
 
-	$content->find('div.nav-wrap',0)->outertext = '';
-	$content->find('span.top-firm-name',0)->outertext = '';
-	$content->find('div#printerFriendly',0)->outertext = '';
-	$content->find('br[class=clear]',0)->outertext = '';
-	$content->find('div#footer',0)->id=NULL;
+    $content->save();
 
-	$br_br = $content->find('br');
+    //Query to check if the post already exist on the system
+    $query = db_select('node', 'n');
+    $query->condition('n.type', 'tax_tip', '=')
+            ->condition('n.title', $title, '=')
+            ->fields('n', array('nid'));
+    $result = $query->execute();
 
-	foreach ($br_br as $key => $value){
-		$content->find('br',$key)->outertext = '';
-	}
+    //Count the number of results
+    $numRows = $result->rowCount();
 
-	$date = $content->find('h2',0)->innertext;
-	
-	$date = explode(' ', $date);
-	$month = date('m',strtotime($date[0]));
-	$day = str_replace(',', '', $date[1]);
-	
-	$date = $date[2].'-'.$month.'-'.$day.' 00:00:00';
+    if ($numRows == 0) {
+        //Create a node object, and add node properties.
+        $newNode = (object) NULL;
+        $newNode->type = 'tax_tip';
+        $newNode->uid = 1;
+        $newNode->created = strtotime("now");
+        $newNode->changed = strtotime("now");
+        $newNode->status = 1;
+        $newNode->comment = 0;
+        $newNode->promote = 0;
+        $newNode->moderate = 0;
+        $newNode->sticky = 0;
+        $newNode->language = 'und';
 
-	$title = $content->find('h1',0)->innertext;
+        $newNode->title = htmlspecialchars_decode($title);
+        $contenedor = $content->outertext;
 
-	$content->save();
-		
-	//Query to check if the post already exist on the system
-	$query = db_select('node', 'n');
-	$query->condition('n.type', 'tax_tip', '=')
-		->condition('n.title', $title, '=')
-		->fields('n', array('nid'));
-	$result = $query->execute();
-	
-	//Count the number of results
-	$numRows = $result->rowCount();
+        $contenedor = str_replace('|', ' ', $contenedor);
+        $contenedor = str_replace('width="600"', 'width="100%"', $contenedor);
+        $contenedor = str_replace('width="600px"', 'width="100%"', $contenedor);
 
-	if($numRows == 0){
-		//Create a node object, and add node properties.
-		$newNode = (object) NULL;
-		$newNode->type = 'tax_tip';
-		$newNode->uid = 1;
-		$newNode->created = strtotime("now");
-		$newNode->changed = strtotime("now");
-		$newNode->status = 1;
-		$newNode->comment = 0;
-		$newNode->promote = 0;
-		$newNode->moderate = 0;
-		$newNode->sticky = 0;
-		$newNode->language = 'und';
+        $newNode->field_date_news['und'][0]['value'] = $date;
 
-		$newNode->title = $title;
-		$contenedor = $content->outertext; 
+        $newNode->body['und'][0]['value'] = $contenedor;
+        $newNode->body['und'][0]['format'] = 'full_html';
 
-		$contenedor = str_replace('|',' ', $contenedor);
-		$contenedor = str_replace('width="600"','width="100%"', $contenedor);
-		$contenedor = str_replace('width="600px"','width="100%"', $contenedor);
-		
-		$newNode->field_date_news['und'][0]['value'] = $date;
+        node_save($newNode);
 
-		$newNode->body['und'][0]['value'] = $contenedor;
-		$newNode->body['und'][0]['format'] = 'full_html';
-		
-		node_save($newNode);
-		
-		//Create a path alias for the node.
-		$path['alias'] = str_replace(' ', '-', $title);
-		$path['source'] = 'node/'.$newNode->nid;
-		$path['language'] = LANGUAGE_NONE;
-		path_save($path);
-	}
+        //Create a path alias for the node.
+        $path['alias'] = str_replace(' ', '-', $title);
+        $path['source'] = 'node/' . $newNode->nid;
+        $path['language'] = LANGUAGE_NONE;
+        path_save($path);
+    }
 }
