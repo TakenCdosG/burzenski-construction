@@ -176,7 +176,7 @@
             </td>
             <td>
                 <?php
-                $nodos5 = node_load(416);
+                /*$nodos5 = node_load(416);
                 $fifth_image = file_create_url($nodos5->field_image['und'][0]['uri']);
                 if (!empty($nodos5->field_link_homeimage)) {
                     print "<a href='" . $nodos5->field_link_homeimage['und'][0]['value'] . "'>";
@@ -195,8 +195,26 @@
                 <?php
                 if (!empty($nodos5->field_link_homeimage)) {
                     print "</a>";
-                }
+                }*/
                 ?>
+                <?php $type = "home_fifth_content"; ?>
+                <?php $nodes_home_fifth_content = node_load_multiple(array(), array('type' => $type, 'status' => 1)); ?>
+                <div id="slidingHomeFifthContent">
+                    <?php foreach ($nodes_home_fifth_content as $first_content): ?>
+                        <?php $images = $first_content->field_home_fifth_image['und']; ?>
+                        <?php if (count($images) > 1): ?>
+                            <?php foreach ($images as $key => $img): ?>
+                                <div>
+                                    <?php print theme_image_style(array('style_name' => 'image_home_fifth_content', 'path' => $img['uri'], 'alt' => $img['alt'], 'title' => $img['title'], 'height' => NULL, 'width' => NULL)); ?>     
+                                </div>                      
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div>
+                                <?php print theme_image_style(array('style_name' => 'image_home_fifth_content', 'path' => $images[0]['uri'], 'alt' => $images[0]['alt'], 'title' => $images[0]['title'], 'height' => NULL, 'width' => NULL)); ?>   
+                            </div>                   
+                        <?php endif; ?> 
+                    <?php endforeach; ?>
+                </div>
             </td>
         </tr>
     </table>

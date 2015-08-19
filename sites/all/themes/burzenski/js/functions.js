@@ -41,8 +41,15 @@ function jshowoff(){
         controls: false,
         hoverPause: false,
         speed : 6000
-    }); 
+    });
     
+    //-> slidingHomeFifthContent
+    $('#slidingHomeFifthContent').jshowoff({
+        effect: 'fade',
+        controls: false,
+        hoverPause: false,
+        speed : 6000
+    });
 }
                     
 
