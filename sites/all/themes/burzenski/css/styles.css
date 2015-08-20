@@ -1645,7 +1645,7 @@ div.field-name-field-show-widget-news-events-{
 #map-google-map {
     height: 380px;
     margin-top: 20px;
-    width: 498px; }
+    width: 450px; }
 
 #map_google_text p {
     font-family: Arial;
@@ -3135,4 +3135,13 @@ div.boxes-wrapper h2.box-title{
 
 #container_primary_link_search .menu .dropdown-wrapper{
     margin-top: -13px;
+}
+
+#webform-client-form-538, #webform-client-form-541 {
+	width: 450px;
+	padding-left: 20px;
+	font: normal 16px "Helvetica";
+	margin-bottom: 40px;
+	position: relative;
+	overflow: hidden;
 }
