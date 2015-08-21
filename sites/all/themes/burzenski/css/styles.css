@@ -3152,4 +3152,5 @@ div.boxes-wrapper h2.box-title{
 
 .field-name-body ol {
 	list-style-type: decimal;
+	padding-left: 24px;
 }

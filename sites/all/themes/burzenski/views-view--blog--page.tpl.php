@@ -98,11 +98,12 @@
     <div id="list_months"  class="list">
         <?php
         global $base_path;
-        $result = db_query('SELECT n.nid, n.created FROM {node} n WHERE type = :type ORDER BY n.created ASC', array(':type' => 'blog'));
+		$result = node_load_multiple(array(), array('type' => 'blog', 'published' => 1));
+        //$result = db_query('SELECT n.nid, n.created FROM {node} n WHERE type = :type AND published = :published ORDER BY n.created ASC', array(':type' => 'blog', ':published' => 1));
         foreach ($result as $record) {
 
-            $nodob = node_load($record->nid);
-            $dates[] = date("Y-m", strtotime($nodob->field_post_date['und'][0]['value']));
+            //$nodob = node_load($record->nid);
+            $dates[] = date("Y-m", strtotime($record->field_post_date['und'][0]['value']));
         }
 
         $dates = array_unique($dates);
