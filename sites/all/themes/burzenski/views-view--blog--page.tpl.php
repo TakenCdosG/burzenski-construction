@@ -98,7 +98,7 @@
     <div id="list_months"  class="list">
         <?php
         global $base_path;
-		$result = node_load_multiple(array(), array('type' => 'blog', 'published' => 1));
+		$result = node_load_multiple(array(), array('type' => 'blog', 'status' => 1));
         //$result = db_query('SELECT n.nid, n.created FROM {node} n WHERE type = :type AND published = :published ORDER BY n.created ASC', array(':type' => 'blog', ':published' => 1));
         foreach ($result as $record) {
 
