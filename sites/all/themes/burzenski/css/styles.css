@@ -987,8 +987,8 @@ margin-right: 14px;
     font-family:Arial,Helvetica,sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size:17px;
-    line-height: 26px;
+    font-size:14px;
+    line-height: 18px;
     padding: 38px;
     padding-left: 0px;
 }
@@ -1542,7 +1542,7 @@ div.field-name-field-show-widget-news-events-{
 #home-tabs-left-table-1 .region-sidebar-calendar	#news_events  h1 {
     color: #532012;
     font-family: "Helvetica neue bold";
-    font-size: 27px;
+    font-size: 20px;
     margin-bottom: 12px;
 }
 
@@ -2201,9 +2201,9 @@ div.boxes-wrapper p.box-link a{
 .c2_imgfirst
 {
     width: 649px;
-    height: 44px;
+    height: 33px;
     background-image: url(../img/overlay_image.fw.png);
-    margin-top: 328px;
+    margin-top: 339px;
     padding-left: 21px;
     padding-right: 50px;
     padding-top: 6px

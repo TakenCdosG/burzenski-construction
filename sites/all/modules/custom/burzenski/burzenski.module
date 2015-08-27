@@ -189,7 +189,7 @@ function render_widgets_calendar($node) {
     $html = '
 <div>
 <div id="news_events">
-   <h1>Success Stories, Events & Blog</h1>
+   <h1>News, Events & Blog</h1>
   ' . views_embed_view("new_event_render", "blog") . views_embed_view("new_event_render", "news") . views_embed_view("new_event_render", "events") . views_embed_view("new_event_render", "text") . '
 </div>
 </div>
