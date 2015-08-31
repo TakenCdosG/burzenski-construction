@@ -2099,7 +2099,7 @@ div#list_news_container ul.pager li a{
 .heading, .subheading, #node-140 h1,
 body.node-type-tax-tip div#container h1,
 .node-news h1, .node-news .field-name-field-date-news{
-    color: #D38F35;
+    color: #903;
     font-family: AllerBold;
     font-size: 26px;
     margin-top: 10px;
@@ -2108,7 +2108,7 @@ body.node-type-tax-tip div#container h1,
 }
 
 .back-link a{
-    color: #D38F35;
+    color: #903;
     font-family: AllerBold;
     font-size: 16px;
     text-decoration: none;
