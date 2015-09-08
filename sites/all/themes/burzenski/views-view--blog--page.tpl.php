@@ -101,9 +101,9 @@
 		$query = new EntityFieldQuery();
 	  	$entities = $query->entityCondition('entity_type', 'node')
 	  		->propertyCondition('type', 'blog')
+			->propertyCondition('status', 1)
+			->fieldOrderBy('field_post_date', 'value', 'DESC')
 	  		->execute();
-		/*->propertyCondition('published', 1)
-			->fieldOrderBy('field_post_date', 'value', 'DESC')*/
 		dpm($entities);
 		$result = node_load_multiple(array(), array('type' => 'blog', 'status' => 1));
         //$result = db_query('SELECT n.nid, n.created FROM {node} n WHERE type = :type AND published = :published ORDER BY n.created ASC', array(':type' => 'blog', ':published' => 1));
