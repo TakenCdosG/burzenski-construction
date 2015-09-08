@@ -98,6 +98,14 @@
     <div id="list_months"  class="list">
         <?php
         global $base_path;
+		$query = new EntityFieldQuery();
+	  	$entities = $query->entityCondition('entity_type', 'node') 
+		    ->propertyCondition('type', 'blog')
+			->propertyCondition('published', 1)
+		    ->fieldCondition('field_website_id', $site_id)
+			->fieldOrderBy('field_post_date', 'value', 'DESC')
+		    ->execute();
+		dpm($entities);
 		$result = node_load_multiple(array(), array('type' => 'blog', 'status' => 1));
         //$result = db_query('SELECT n.nid, n.created FROM {node} n WHERE type = :type AND published = :published ORDER BY n.created ASC', array(':type' => 'blog', ':published' => 1));
         foreach ($result as $record) {
