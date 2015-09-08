@@ -104,8 +104,7 @@
 			->propertyCondition('status', 1)
 			->fieldOrderBy('field_post_date', 'value', 'DESC')
 	  		->execute();
-		dpm($entities);
-		$result = node_load_multiple(array(), array('type' => 'blog', 'status' => 1));
+		$result = node_load_multiple(array_keys($entities['node']));
         //$result = db_query('SELECT n.nid, n.created FROM {node} n WHERE type = :type AND published = :published ORDER BY n.created ASC', array(':type' => 'blog', ':published' => 1));
         foreach ($result as $record) {
 
