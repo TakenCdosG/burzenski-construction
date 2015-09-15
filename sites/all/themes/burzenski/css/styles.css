@@ -3154,3 +3154,7 @@ div.boxes-wrapper h2.box-title{
 	list-style-type: decimal;
 	padding-left: 24px;
 }
+
+.p1.internal_text a {
+	color: #990033;
+}
