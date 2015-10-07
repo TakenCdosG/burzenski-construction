@@ -6,8 +6,8 @@ $(document).ready(function(){
     custom_page();
     login_custom();
     newsletter();
-    jQuery('.menu li').eq(1).find('a').html('QuickBooks <span style="font-size: 11px;"><sup>&reg;</sup></span>');
-    jQuery('.page-node-448 h1.basic_page').html('QuickBooks<sup>&reg;</sup> Services');
+    //jQuery('.menu li').eq(1).find('a').html('QuickBooks <span style="font-size: 11px;"><sup>&reg;</sup></span>');
+    jQuery('.page-node-516 h1.basic_page').html('QuickBooks<sup>&reg;</sup> Services');
 });//end document ready 
 
 
