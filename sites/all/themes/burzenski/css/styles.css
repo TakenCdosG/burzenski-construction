@@ -989,9 +989,21 @@ margin-right: 14px;
     font-style: normal;
     font-size:14px;
     line-height: 18px;
-    padding: 38px;
-    padding-left: 0px;
+    padding: 20px 28px 28px 28px;
 }
+
+.page-node #page-wrapper-home table.table-tr{
+    width: 1000px;
+}
+
+.page-node #page-wrapper-home table td{
+    vertical-align: top;
+}
+
+.right-bottom-wrap-table{
+    width: 639px;
+}
+
 h1.title{
     margin-bottom:14px;
     font-family:TrajanProRegular;
@@ -2179,16 +2191,11 @@ div.boxes-wrapper p.box-link a{
 {
     margin-right: 13px;
 }
-#page-wrapper-home table
-{
-    width: 972px;
-}
+
 
 #l_burzenski
 {
-    padding: 26px;
-    padding-right: 0px;
-    width: 328px;
+    padding: 28px 28px 0 28px;
 }
 
 .c_imgfirst{
@@ -2323,9 +2330,10 @@ div.boxes-wrapper p.box-link a{
 }
 
 #home-tabs-right{
-    width: 328px;
+    width: 360px;
     height: 241px;
     float: left;
+    margin-right: 2px;
 }
 
 #home-tabs-right h1
@@ -3029,9 +3037,7 @@ a.rsvp{
     line-height: 20px;
 }
 
-.page-node #page-wrapper-home table{
-    width: auto;
-}
+
 
 #top_image_blog{
     margin: 0px -26px 10px -26px;
