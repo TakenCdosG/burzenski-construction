@@ -992,6 +992,10 @@ margin-right: 14px;
     padding: 38px;
     padding-left: 0px;
 }
+#home-tabs-left.home a {
+	color: #903;
+}
+
 h1.title{
     margin-bottom:14px;
     font-family:TrajanProRegular;
