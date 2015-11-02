@@ -1,3 +1,6 @@
+.sucuriquarantine/
+sucuri-0ca485b8f3dc699502fa5fe4921477f3.php
+
 # Ignore configuration files that may contain sensitive information.
 sites/*/*settings*.php
 
