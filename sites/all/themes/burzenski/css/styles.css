@@ -634,7 +634,7 @@ margin-right: 14px;
 
 #footer div.copyright div.logos_footer {
     background: transparent;
-    height: 100px;
+    min-height: 100px;
     padding-top: 5px;
     margin: 0 auto;
 
@@ -654,7 +654,9 @@ margin-right: 14px;
 }
 #footer div.logos_footer table#logo_footer_wrapper .logo_footer_image img {
     vertical-align: super;
-}  
+}
+
+.wrapper-footer-logo { width: auto; height: auto; margin: 0 auto; }
 
 
 /* Homepage */
