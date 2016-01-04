@@ -1,4 +1,4 @@
-<div class="content">
+<!--<div class="content">
   <?php print render(menu_tree_output(menu_tree_all_data("main-menu", NULL, 2))); ?>
   <div class="copyright">
     <div class="town_green">
@@ -11,4 +11,4 @@
     <p>INFONewHaven.com is a collaborative effort by Market New Haven and Town Green Special Services.</p>
     <p><a href="http://getlisted.infonewhaven.com/" target="_blank">List your New Haven business here!</a></p>
   </div>
-</div>
+</div>-->

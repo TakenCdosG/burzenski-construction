@@ -1,2 +1,2 @@
 #!/bin/sh
- mysql -h mysql50-108.wc1.dfw1.stabletransit.com -u 676508_info -p'INFOnewhaven900$' 676508_infonewhaven_drupal < /mnt/stor6-wc1-dfw1/676508/www.infonewhaven.com/web/content/484852_drupal.sql
+#mysql -h mysql50-108.wc1.dfw1.stabletransit.com -u 676508_info -p'INFOnewhaven900$' 676508_infonewhaven_drupal < /mnt/stor6-wc1-dfw1/676508/www.infonewhaven.com/web/content/484852_drupal.sql

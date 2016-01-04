@@ -9,7 +9,7 @@
 # 20051410 JLynch 
 # myisamFixer.php 
 
-ini_set('display_errors', 'On'); 
+/*ini_set('display_errors', 'On'); 
 error_reporting(E_ALL); 
 
 
@@ -29,6 +29,6 @@ die('query failed: ');
 while ($row = mysql_fetch_array($result)){ 
 mysql_query("ALTER TABLE ".$row[0]." ENGINE=MyISAM; "); 
 #Command Reference: ALTER TABLE tableName ENGINE=MyISAM 
-} 
+} */
 
 ?> 
